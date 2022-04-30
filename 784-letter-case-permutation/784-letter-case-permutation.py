@@ -6,7 +6,7 @@ class Solution:
                 ans.append("".join(temp))
                 return
             if s[i].isalpha():
-                c=chr(ord(s[i])+32) if s[i].isupper() else chr(ord(s[i])-32)
+                c=chr(ord(s[i])^(1<<5))
                 solve(s,i+1,temp + [s[i]])
                 solve(s,i+1,temp + [c])
             else:
