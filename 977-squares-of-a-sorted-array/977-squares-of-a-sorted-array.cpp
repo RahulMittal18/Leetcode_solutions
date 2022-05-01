@@ -8,7 +8,8 @@ public:
             if (abs(A[i]) > abs(A[j])) {
                 result[p] = A[i] * A[i];
                 i++;
-            } else {
+            }
+            else {
                 result[p] = A[j] * A[j];
                 j--;
             }
