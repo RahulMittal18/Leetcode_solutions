@@ -3,7 +3,7 @@ public:
     void moveZeroes(vector<int>& nums) {
         
         if(nums.size()<2){
-            return ;
+            return;
         }
         int r=1;
         int l=0;
@@ -19,10 +19,7 @@ public:
             if(nums[l]==0 and nums[r]!=0){
                 swap(nums[l],nums[r]);
                 l++;r++;
-            }
-            
-            
+            }            
         }
-        // return nums;
     }
 };
