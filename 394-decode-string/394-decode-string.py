@@ -1,7 +1,6 @@
 class Solution:
     def decodeString(self, s: str) -> str:
         st=[]
-        # ans=""
         for c in s:
             if c=="]":
                 ans=""
