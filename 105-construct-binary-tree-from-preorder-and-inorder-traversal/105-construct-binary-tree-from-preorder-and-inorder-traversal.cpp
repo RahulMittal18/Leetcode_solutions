@@ -11,7 +11,8 @@
  */
 class Solution {
 public:
-    
+            int idx=0;
+
     int search(vector<int> inorder, int strt, int end, int value)
 {
     int i;
@@ -23,7 +24,7 @@ public:
         return 0;
 }
     
-    TreeNode* solve(vector<int> preorder, vector<int> inorder,int st,int end,int &idx  ){
+    TreeNode* solve(vector<int> preorder, vector<int> inorder,int st,int end ){
         if(st>end) return NULL;
 
         //static int pre_index=0;
@@ -32,13 +33,12 @@ public:
         if(st==end) return root;
         int rootIndex = search(inorder,st,end, root->val);
 
-        root->left = solve(preorder,inorder,st,rootIndex-1,idx);
-        root->right = solve(preorder,inorder,rootIndex+1,end,idx);
+        root->left = solve(preorder,inorder,st,rootIndex-1);
+        root->right = solve(preorder,inorder,rootIndex+1,end);
         return root;
     }
     
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        int idx=0;
-        return solve(preorder,inorder,0,inorder.size()-1,idx);
+        return solve(preorder,inorder,0,inorder.size()-1);
     }
 };
