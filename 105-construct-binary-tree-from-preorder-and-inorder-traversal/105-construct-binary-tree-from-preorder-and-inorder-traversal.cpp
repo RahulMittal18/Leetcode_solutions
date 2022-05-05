@@ -27,7 +27,6 @@ public:
     TreeNode* solve(vector<int> preorder, vector<int> inorder,int st,int end ){
         if(st>end) return NULL;
 
-        //static int pre_index=0;
         TreeNode* root = new TreeNode(preorder[idx++]);
 
         if(st==end) return root;
