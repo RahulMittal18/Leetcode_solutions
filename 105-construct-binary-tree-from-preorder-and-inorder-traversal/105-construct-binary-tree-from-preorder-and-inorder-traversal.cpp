@@ -11,10 +11,7 @@
  */
 class Solution {
 public:
-            int idx=0;
-
-
-    
+    int idx=0;
     TreeNode* solve(vector<int> preorder, vector<int> inorder,int st,int end ){
         if(st>end) return NULL;
 
@@ -28,7 +25,6 @@ public:
             break;
         }
     }
-
         root->left = solve(preorder,inorder,st,rootIndex-1);
         root->right = solve(preorder,inorder,rootIndex+1,end);
         return root;
