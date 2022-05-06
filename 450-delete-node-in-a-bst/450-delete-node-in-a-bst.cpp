@@ -30,10 +30,12 @@ public:
                 return NULL;
             else if(!root->left){
                 TreeNode* temp=root->right;
+                delete root;
                 return temp;
             }
             else if(!root->right){
                 TreeNode* temp=root->left;
+                delete root;
                 return temp;
             }
             else{
