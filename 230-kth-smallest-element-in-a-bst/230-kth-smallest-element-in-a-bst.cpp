@@ -12,7 +12,6 @@
 class Solution {
 public:
     void solve(TreeNode* root,int& k,int &ans){
-        // cout<<x<<endl;
         if(!root)
             return;
         solve(root->left,k,ans);
