@@ -24,7 +24,7 @@ public:
     
         for (int i = start; i < nums.size(); ++i) {
             if (i == start || nums[i - 1] != nums[i]) {
-                for (vector<int>& subset : kSum(nums, static_cast<long>(target) - nums[i], i + 1, k - 1)) {
+                for (vector<int>& subset : kSum(nums, target-nums[i], i+1, k-1)) {
                     res.push_back({nums[i]});
                     res.back().insert(end(res.back()), subset.begin(), subset.end());
                 }
