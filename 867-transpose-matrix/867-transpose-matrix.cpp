@@ -4,8 +4,8 @@ public:
         int m = matrix.size();
         int n = matrix[0].size();
         vector<vector<int>> mat(n, vector<int> (m));
-        for(int i=0;i<matrix.size();i++){
-            for(int j=0;j<matrix[0].size();j++){
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
                 mat[j][i]=matrix[i][j];
             }
         }
