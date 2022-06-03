@@ -4,21 +4,18 @@ public:
     NumMatrix(vector<vector<int>>& matrix) {
         int m = matrix.size();
         int n = matrix[0].size();
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                if(j==0) dp.push_back({matrix[i][j]});
-                else dp.back().push_back(matrix[i][j]+dp[i][j-1]);
+        for(int i=0;i<m+1;i++){
+            for(int j=0;j<n+1;j++){
+                if(j==0) dp.push_back({0});
+                else if (i==0) dp.back().push_back(0);
+                else dp.back().push_back(matrix[i-1][j-1]+dp[i][j-1]+dp[i-1][j]-dp[i-1][j-1]);
             }
         }
     }
     
     int sumRegion(int row1, int col1, int row2, int col2) {
-        int res=0;
-        for(int i=row1;i<=row2;i++){
-            if(col1!=0) res+= (dp[i][col2]-dp[i][col1-1]);
-            else res+= (dp[i][col2]);
-        }
-        return res;
+        return dp[row2+1][col2+1]+dp[row1][col1]-dp[row2+1][col1]-dp[row1][col2+1];
+        // return 0;
     }
 };
 
