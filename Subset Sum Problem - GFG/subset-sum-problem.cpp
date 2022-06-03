@@ -12,17 +12,16 @@ public:
     bool isSubsetSum(vector<int>arr, int sum){
         // code here
         int n = arr.size();
-        int dp[n+1][sum+1];
+        bool dp[n+1][sum+1];
         for(int i=0;i<n+1;i++){
             for(int s=0;s<sum+1;s++){
-                if(i==0 || s==0) dp[i][s]=0;
-                else if(arr[i-1]<=s) dp[i][s] = max(dp[i-1][s], arr[i-1]+dp[i-1][s-arr[i-1]]);
+                if(i==0 and s!=0) dp[i][s]=false;
+                else if(s==0) dp[i][s]=true;
+                else if(arr[i-1]<=s) dp[i][s] = dp[i-1][s] || dp[i-1][s-arr[i-1]];
                 else dp[i][s] = dp[i-1][s];
-                
-                if(dp[i][s]==sum) return true;
             }
         }
-        return false;
+        return dp[n][sum];
     }
 };
 
