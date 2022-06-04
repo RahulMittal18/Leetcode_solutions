@@ -1,44 +1,41 @@
 class Solution {
-public:  
-    bool isSafe(int row,int col,vector<string> temp,int n,vector<bool> &rowQ,vector<bool> &upperDiag,vector<bool> &lowerDiag){
-            if(rowQ[row] or upperDiag[row-col+n-1] or lowerDiag[row+col]) return false;        
+public:
+    vector<vector<string>> ret;
+    bool is_valid(vector<string> &board, int row, int col){
+        // check col
+        for(int i=row;i>=0;--i)
+            if(board[i][col] == 'Q') return false;
+        // check left diagonal
+        for(int i=row,j=col;i>=0&&j>=0;--i,--j)
+            if(board[i][j] == 'Q') return false;
+        //check right diagonal
+        for(int i=row,j=col;i>=0&&j<board.size();--i,++j)
+            if(board[i][j] == 'Q') return false;
         return true;
     }
-    
-    
-    void solve(int col,vector<string> &temp,vector<vector<string>> &ans, int n,vector<bool> &rowQ,vector<bool> &upperDiag,vector<bool> &lowerDiag){
-        if(col==n){
-            ans.push_back(temp);
+    void dfs(vector<string> &board, int row){
+        // exit condition
+        if(row == board.size()){
+            ret.push_back(board);
             return;
         }
-        
-        for(int row=0;row<n;row++){
-            if(isSafe(row,col,temp,n,rowQ,upperDiag,lowerDiag)){
-                temp[row][col]='Q';
-                rowQ[row]=true;
-                upperDiag[row-col+n-1]=true;
-                lowerDiag[row+col]=true;
-                solve(col+1,temp,ans,n,rowQ,upperDiag,lowerDiag);
-                temp[row][col]='.';
-                rowQ[row]=false;
-                upperDiag[row-col+n-1]=false;
-                lowerDiag[row+col]=false;
+        // iterate every possible position
+        for(int i=0;i<board.size();++i){
+            if(is_valid(board,row,i)){
+                // make decision
+                board[row][i] = 'Q';
+                // next iteration
+                dfs(board,row+1);
+                // back-tracking
+                board[row][i] = '.';
             }
         }
-        
-    }    
-    
+    }
     vector<vector<string>> solveNQueens(int n) {
-        vector<vector<string>> ans;
-        vector<string> vec(n);
-        string s(n,'.');
-        for(int i=0;i<n;i++){
-            vec[i]=s;
-        }
-        vector<bool> rowQ(n,false);
-        vector<bool> upperDiag(2*n-1,false);
-        vector<bool> lowerDiag(2*n-1,false);
-        solve(0,vec,ans,n,rowQ,upperDiag,lowerDiag);
-        return ans;
+		// return empty if n <= 0
+        if(n <= 0) return {{}};
+        vector<string> board(n,string(n,'.'));
+        dfs(board,0);
+        return ret;
     }
 };
