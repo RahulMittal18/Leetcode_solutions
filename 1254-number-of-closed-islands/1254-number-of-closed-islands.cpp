@@ -1,33 +1,60 @@
 class Solution {
 public:
-    int closedIsland(vector<vector<int>>& grid) {
-        int res = 0;
-        for (int i = 0; i < grid.size(); i++){
-            for (int j = 0; j < grid[0].size(); j++){
-                if (grid[i][j] == 0){
-                    res += dfs(grid, i, j) ? 1 : 0;
+    
+    void bfs(vector<vector<int>>& grid, vector<vector<int>>& vis, int i, int j, int m, int n)
+    {
+        queue<pair<int,int>> q;
+        q.push({i,j});
+		vis[i][j]=1;
+        while(q.empty()!=1)
+        {
+            pair<int,int> curr = q.front();
+            q.pop();
+            vector<int> dx{-1,1,0,0};
+            vector<int> dy{0,0,1,-1};
+            for(int k=0;k<4;k++)
+            {
+                int X = curr.first+dx[k];
+                int Y = curr.second+dy[k];
+                if(X>=0 && X<m && Y>=0 && Y<n && grid[X][Y]==0 && vis[X][Y]==0)
+                {
+                    q.push({X,Y});
+                    vis[X][Y]=1;
                 }
             }
         }
-        return res;
     }
-    bool dfs(vector<vector<int>>& g, int i, int j){
-        if (i < 0 || j < 0 || i >= g.size() || j >= g[0].size()){
-            return false;
+
+    
+    int closedIsland(vector<vector<int>>& grid) 
+    {
+        int m = grid.size();
+        int n = grid[0].size();
+        vector<vector<int>> vis(m,vector<int>(n,0));
+  
+        
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if((i*j==0 || i==m-1 || j==n-1)&& grid[i][j]==0 && vis[i][j]==0)
+               {
+                  bfs(grid, vis, i, j, m, n);
+               }     
+            }
         }
-        if (g[i][j] == 1){
-            return true;
+        int ans = 0;
+        for(int i=1;i<m-1;i++)
+        {
+            for(int j=1;j<n-1;j++)
+            {
+                if(grid[i][j]==0 && vis[i][j]==0)
+                {
+                    bfs(grid,vis,i,j,m,n);
+                    ans++;
+                }
+            }
         }
-        g[i][j] = 1;
-        /* IMPORTANT NOTE: 
-        WHY I CANNOT USE `return dfs(g, i+1, j) && dfs(g, i, j+1) && dfs(g, i-1, j) && dfs(g, i, j-1);`???
-        BECAUSE IF ANY OF THE FIRST DFS() RETURNS FALSE, FOLLOWING ONES WILL NOT EXECUTE!!! THEN WE DON'T
-        HAVE THE CHANCE TO MARK THOSE 0s TO 1s!!!
-        */
-        bool d1 = dfs(g, i+1, j);
-        bool d2 = dfs(g, i, j+1);
-        bool d3 = dfs(g, i-1, j);
-        bool d4 = dfs(g, i, j-1);
-        return d1 && d2 && d3 && d4;
+        return ans;
     }
 };
