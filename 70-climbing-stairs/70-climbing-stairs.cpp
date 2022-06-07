@@ -1,23 +1,12 @@
 class Solution {
 public:
-    Solution(){
-        // Base case:
-        climbMethodTo[0] = 1;   // reach floor_0 by doing nothing
-        climbMethodTo[1] = 1;   // reach floor_1 with one step
-    }
-    
     int climbStairs(int n) {
-        
-        // look-up table, also known as memoization
-        if( climbMethodTo[n] ){
-            return climbMethodTo[n];
+        int dp[n+1];
+        dp[0]=1;
+        dp[1]=1;
+        for(int i=2;i<=n;i++){
+            dp[i]=dp[i-1]+dp[i-2];
         }
-
-        climbMethodTo[n] = climbStairs(n-1) + climbStairs(n-2);
-        
-        return climbMethodTo[n];
+        return dp[n];
     }
-    
-private:
-    map<int, int> climbMethodTo;
 };
