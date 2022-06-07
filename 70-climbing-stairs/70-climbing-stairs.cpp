@@ -1,8 +1,6 @@
 class Solution {
 public:
     Solution(){
-        
-        // Initialization
         // Base case:
         climbMethodTo[0] = 1;   // reach floor_0 by doing nothing
         climbMethodTo[1] = 1;   // reach floor_1 with one step
@@ -14,7 +12,6 @@ public:
         if( climbMethodTo[n] ){
             return climbMethodTo[n];
         }
-        
 
         climbMethodTo[n] = climbStairs(n-1) + climbStairs(n-2);
         
