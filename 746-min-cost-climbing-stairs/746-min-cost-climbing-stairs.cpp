@@ -1,17 +1,15 @@
 class Solution {
 public:
-    int solve(vector<int> cost,int n){
-        if(n<0) return 0;
-        if(m.find(n)!=m.end()) return m[n];
-        int temp = min(solve(cost,n-2),solve(cost,n-1));
-        m[n]=temp+cost[n];
-        return temp + cost[n];
-    }
-    
+
     int minCostClimbingStairs(vector<int>& cost) {
-        return min(solve(cost,cost.size()-1),solve(cost,cost.size()-2));
+        int n = cost.size();
+        int dp[n+1];
+        dp[0]=0;
+        dp[1]=0;
+        for(int i=2;i<=n;i++){
+            dp[i] = min(dp[i-1]+cost[i-1],cost[i-2]+dp[i-2]);
+        }
+        return dp[n];
     }
     
-private:
-    map<int,int> m;
 };
