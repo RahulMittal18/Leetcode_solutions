@@ -1,12 +1,15 @@
-class Solution(object):
-    def rob(self, nums):
-        hm={}
-        def solve(i,nums):
-            if i>=len(nums):
-                return 0
-            if i in hm:
-                return hm[i]
-            else:
-                hm[i]=max(solve(i+1,nums),solve(i+2,nums)+nums[i])
-                return hm[i]
-        return solve(0,nums)
+class Solution {
+public:
+    int solve(vector<int>& nums,int i,vector<int> &dp){
+        if(i>=nums.size()) return 0;
+        if(dp[i]==-1){
+            dp[i]=max(solve(nums,i+1,dp),nums[i]+solve(nums,i+2,dp));
+        }
+        return dp[i];
+    }
+    
+    int rob(vector<int>& nums) {
+        vector<int> dp(101,-1);
+        return solve(nums,0,dp);
+    }
+};
