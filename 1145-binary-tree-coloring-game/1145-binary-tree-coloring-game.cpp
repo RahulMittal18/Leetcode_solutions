@@ -11,31 +11,17 @@
  */
 class Solution {
 public:
-    TreeNode* st;
-    bool search(TreeNode* root,int x){
-        if(!root) return false;
-        if(root->val==x){
-            st=root;
-            return true;
-        }
-        
-        bool left = search(root->left,x);
-        if(left) return true;
-        bool right = search(root->right,x);
-        return right;
-    }
-    
-    int count(TreeNode* root){
-        if(!root) return 0;
-        return 1+count(root->left)+count(root->right);
-    }
-    
+    int left, right, val;
     bool btreeGameWinningMove(TreeNode* root, int n, int x) {
-        search(root,x);
-        int p = count(st->left);
-        int q = count(st->right);
-            
-        if(p>n/2 or q>n/2 or n-p-q-1 >n/2) return true;
-        return false;
+        val = x, n = count(root);
+        return max(max(left, right), n - left - right - 1) > n / 2;
+    }
+
+    int count(TreeNode* node) {
+        if (!node) return 0;
+        int l = count(node->left), r = count(node->right);
+        if (node->val == val)
+            left = l, right = r;
+        return l + r + 1;
     }
 };
