@@ -16,6 +16,7 @@ public:
     
     int deleteAndEarn(vector<int>& nums) {
         for(int x:nums) mp[x]++;
-        return rob(10001);
+        int i = *max_element(nums.begin(),nums.end());
+        return rob(i+1);
     }
 };
