@@ -1,18 +1,21 @@
 class Solution:
     def deleteAndEarn(self, nums: List[int]) -> int:
         points = defaultdict(int)
-        max_number = 0
         # Precompute how many points we gain from taking an element
         for num in nums:
             points[num] += num
-            max_number = max(max_number, num)
-
-        # Declare our array along with base cases
-        max_points = [0] * (max_number + 1)
-        max_points[1] = points[1]
-
-        for num in range(2, len(max_points)):
-            # Apply recurrence relation
-            max_points[num] = max(max_points[num - 1], max_points[num - 2] + points[num])
+            
+        elements = sorted(points.keys())
+        two_back = 0
+        one_back = points[elements[0]]
         
-        return max_points[max_number]
+        for i in range(1, len(elements)):
+            current_element = elements[i]
+            if current_element == elements[i - 1] + 1:
+                # The 2 elements are adjacent, cannot take both - apply normal recurrence
+                two_back, one_back = one_back, max(one_back, two_back + points[current_element])
+            else:
+                # Otherwise, we don't need to worry about adjacent deletions
+                two_back, one_back = one_back, one_back + points[current_element]
+
+        return one_back
