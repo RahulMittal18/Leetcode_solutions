@@ -32,15 +32,10 @@ public:
     
     bool btreeGameWinningMove(TreeNode* root, int n, int x) {
         search(root,x);
-        // if(root->val==x){
-            int p = count(st->left);
-            int q = count(st->right);
-            // if(p==q) return false;
-            // return true;
-        // }
-        // int c = count(st);
+        int p = count(st->left);
+        int q = count(st->right);
+            
         if(p>n/2 or q>n/2 or n-p-q-1 >n/2) return true;
         return false;
-        
     }
 };
