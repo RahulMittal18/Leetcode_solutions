@@ -1,21 +1,19 @@
 class Solution {
 public:
     int jump(vector<int>& nums) {
-        if(nums.size()<2) return 0;   //base case
-        int jump=1,n=nums.size(),currjmp=nums[0],mxjmp=nums[0];
-        int i=0;
-		
-        while(i<n-1)
+        int i, j, index;
+        vector<int> dp(nums.size(), 10000);
+        dp[0]=0;            // to reach 1st index, jumps needed=0
+        for(i=0; i<nums.size(); i++)
         {
-            mxjmp=max(mxjmp,i+nums[i]);
-             
-            if(currjmp==i) //we have to take jump now because our currjump now ends.
+            index=i+1;
+            while(index<i+nums[i]+1)
             {
-                jump++;//increment in jump
-                currjmp=mxjmp; //assign new maxjmp to currjmp
+                if(index >= nums.size()) break;
+                dp[index] = min(dp[index], dp[i]+1);
+                index++;
             }
-            i++;
         }
-        return jump;
+        return dp[nums.size()-1];
     }
 };
