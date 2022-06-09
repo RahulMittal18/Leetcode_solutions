@@ -35,7 +35,7 @@ class Solution
     private:
     int findPar(int a,int par[]){
         if(par[a]==a) return a;
-        return par[a] = findPar(par[a],par);
+        return findPar(par[a],par);
     }
 };
 
