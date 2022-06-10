@@ -6,7 +6,7 @@ public:
         int ans=0;
         map<char,int> mp;
         while(r<s.length()){
-            if(mp.find(s[r])==mp.end() or mp.find(s[r])!=mp.end() and mp[s[r]]==0){
+            if(mp[s[r]]==0){
                 mp[s[r]]+=1;
                 ans=max(ans,r-l+1);
                 r++;
