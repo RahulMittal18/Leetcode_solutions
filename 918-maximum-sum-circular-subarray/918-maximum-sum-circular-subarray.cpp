@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    int kadane1(vector<int> arr){
+    int kadane1(vector<int>& arr){
         int ans = INT_MIN;
         int sum=0;
         for(int x:arr){
@@ -12,7 +12,7 @@ public:
     }
     
     
-    int kadane2(vector<int> arr){
+    int kadane2(vector<int>& arr){
         int ans = INT_MAX;
         int sum=0;
         for(int x:arr){
