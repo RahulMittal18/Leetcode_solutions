@@ -9,7 +9,7 @@ public:
     
     int minimumTotal(vector<vector<int>>& triangle) {
         n = triangle.size();
-        memset(dp, -1, sizeof dp);
+        memset(dp, -1, sizeof(dp));
         return solve(triangle,0,0);
     }
 };
