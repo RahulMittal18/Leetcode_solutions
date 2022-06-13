@@ -16,9 +16,7 @@ public:
                 ncount++;
                 if(last_neg==-1) last_neg = i;
             }
-            else if(ncount%2==1) {
-                ans = max(ans,i-last_neg);
-            }
+            else if(ncount%2==1) ans = max(ans,i-last_neg);
             
             if(ncount%2==0) ans = max(ans,i-k+1);
         }
