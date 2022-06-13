@@ -7,7 +7,7 @@ public:
         int minsum = 0;
         int maxsum = 0;
         int totalsum = 0;
-        for(int x:nums){
+        for(int& x:nums){
             totalsum+=x;
             maxsum = max(x,x+maxsum);
             maxans = max(maxans,maxsum);
