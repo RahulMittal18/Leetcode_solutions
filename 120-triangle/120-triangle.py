@@ -5,8 +5,7 @@ class Solution:
             # base
             if r == len(grid)-1:
                 return grid[r][c]
-            if c > len(grid[c])-1:
-                return float('inf')
+
 
             # memo cond
             if (r,c) in memo:
