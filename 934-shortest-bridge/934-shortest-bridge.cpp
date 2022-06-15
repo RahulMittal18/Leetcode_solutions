@@ -3,7 +3,6 @@ public:
     int m,n;
     void dfs(vector<vector<int>>& grid,int i,int j,queue<pair<int,int>> &q){
         grid[i][j]=-1;
-        q.push({i,j});
         int dir[5]={0,1,0,-1,0};
         for(int k=0;k<4;k++){
             int x = i + dir[k];
@@ -11,6 +10,9 @@ public:
             if(x>=0 and y>=0 and x<m and y<n){
                 if(grid[x][y]==1)
                 dfs(grid,x,y,q);
+                else if(grid[x][y]==0)
+                    q.push({i,j});
+
             }
         }
     }
