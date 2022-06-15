@@ -18,11 +18,10 @@ public:
                     int x = i+dir[k];
                     int y = j+dir[k+1];
                     if(x<0 || y<0 || x>=m || y>=n || maze[x][y]=='+') continue;                    
-                    if( (x==0 or x==m-1 or y==0 or y==n-1) and maze[x][y]=='.') return ans+1;
-                    if(x>=0 and x<m and y>=0 and y<n and maze[x][y]=='.'){
-                        maze[x][y]='+';
-                        q.push({x,y});
-                    }
+                    if(x==0 or x==m-1 or y==0 or y==n-1) return ans+1;
+                    maze[x][y]='+';
+                    q.push({x,y});
+                    
                 }
             }
             ans++;
