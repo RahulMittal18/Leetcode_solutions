@@ -10,12 +10,12 @@ public:
 
         queue<pair<int, int>> q;
         q.push({0,0});
-        vector<vector<int>>directions={{1,1},{0,1},{1,0},{0,-1},{-1,0},{-1,-1},{1,-1},{-1, 1}};
+        vector<int> directions[8]={{1,1},{0,1},{1,0},{0,-1},{-1,0},{-1,-1},{1,-1},{-1, 1}};
         grid[0][0] = 1;
         while(!q.empty()){
-            auto curr = q.front();
+            pair<int,int> curr = q.front();
             int x = curr.first, y = curr.second;
-            if( x == row -1 && y == col -1) return grid[x][y];
+            if( x == row-1 && y == col-1) return grid[x][y];
 
             for(auto direction : directions){
                 int nx = x + direction[0];
