@@ -1,43 +1,28 @@
 class Solution {
-public:  
-    int m,n;
-    void dfs(vector<vector<int>> &heights,vector<vector<bool>> &visited,int i,int j){
-
-        visited[i][j]=true;
-        
-        int dir[5]={0,1,0,-1,0};
-        for(int k=0;k<4;k++){
-            int x = i+dir[k];
-            int y = j+dir[k+1];
-            if(x>=0 and y>=0 and x<m and y<n and !visited[x][y] and heights[i][j]<=heights[x][y])
-                dfs(heights,visited,x,y);
-        }
-    }
-    
-    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
-        m = heights.size();
-        n = heights[0].size();
-        vector<vector<bool>> pacific(m,vector<bool> (n,false));
-        vector<vector<bool>> atlantic(m,vector<bool> (n,false));
-        vector<vector<int>> ans;
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                if(i==0 || j==0)
-                    dfs(heights,pacific,i,j);
-            }
-        }
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                if(i==m-1 || j==n-1)
-                    dfs(heights,atlantic,i,j);
-            }
-        }
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                if(pacific[i][j]&&atlantic[i][j])
-                    ans.push_back({i,j});
-            }
-        }
+public:
+    int m, n;
+    vector<vector<int> > ans;
+    vector<vector<bool> > atlantic, pacific;
+    queue<pair<int, int> > q;
+    vector<vector<int> > pacificAtlantic(vector<vector<int>>& mat) {
+        if(!size(mat)) return ans;
+        m = size(mat), n = size(mat[0]);
+        atlantic = pacific = vector<vector<bool> >(m, vector<bool>(n, false));
+        for(int i = 0; i < m; i++) bfs(mat, pacific, i, 0), bfs(mat, atlantic, i, n - 1);
+        for(int i = 0; i < n; i++) bfs(mat, pacific, 0, i), bfs(mat, atlantic, m - 1, i);             
         return ans;
+    }
+    void bfs(vector<vector<int> >& mat, vector<vector<bool> >& visited, int i, int j){        
+        q.push({i, j});
+        while(!q.empty()){
+            tie(i, j) = q.front(); q.pop();
+            if(visited[i][j]) continue;
+            visited[i][j] = true;
+            if(atlantic[i][j] && pacific[i][j]) ans.push_back(vector<int>{i, j});
+            if(i + 1 <  m && mat[i + 1][j] >= mat[i][j]) q.push({i + 1, j});
+            if(i - 1 >= 0 && mat[i - 1][j] >= mat[i][j]) q.push({i - 1, j});
+            if(j + 1 <  n && mat[i][j + 1] >= mat[i][j]) q.push({i, j + 1});
+            if(j - 1 >= 0 && mat[i][j - 1] >= mat[i][j]) q.push({i, j - 1});
+        }
     }
 };
