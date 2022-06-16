@@ -9,6 +9,7 @@ public:
                 i--;
                 j++;
         }
+        // if current palindromic substring length is greater than longest found so far,then update starting and ending indexes
         if(j-i-1>r-l+1){
             l=i+1;
             r=j-1;
@@ -21,6 +22,7 @@ public:
                 i--;
                 j++;
         }
+        // if current palindromic substring length is greater than longest found so far,then update starting and ending indexes
         if(j-i-1>r-l+1){
             l=i+1;
             r=j-1;
@@ -29,10 +31,12 @@ public:
     
     string longestPalindrome(string s) {
         n=s.size();
+        // Expanding from center to get even and odd length palindromic substring
         for(int i=0;i<n;i++){
             evenPalindrome(s,i,i+1);
             oddPalindrome(s,i,i);
         }
+        
         return s.substr(l,r-l+1);
     }
 };
