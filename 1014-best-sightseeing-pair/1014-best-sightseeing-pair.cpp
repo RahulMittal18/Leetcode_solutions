@@ -6,7 +6,6 @@ public:
         for(int i=0;i<prices.size();i++){
             pro = max(pro,prices[i]-i+maxp);
             maxp = max(maxp,prices[i]+i);
-
         }
         return pro;
     }
