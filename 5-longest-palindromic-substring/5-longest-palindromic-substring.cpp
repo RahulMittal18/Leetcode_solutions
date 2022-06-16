@@ -1,7 +1,9 @@
 class Solution {
 public:
     int n;
-    int l=0,r=0;
+    int l=0,r=0; // to store starting and ending index of palindromic substring
+    
+    // function to find even length palindrome from middle indexes
     void evenPalindrome(string &s,int i,int j){
         while(i>=0 and j<n and s[i]==s[j]){
                 i--;
@@ -13,6 +15,7 @@ public:
         }
     }
     
+    // function to find odd length palindrome from middle indexes
     void oddPalindrome(string &s,int i,int j){
         while(i>=0 and j<n and s[i]==s[j]){
                 i--;
@@ -26,7 +29,6 @@ public:
     
     string longestPalindrome(string s) {
         n=s.size();
-        int ans =0;
         for(int i=0;i<n;i++){
             evenPalindrome(s,i,i+1);
             oddPalindrome(s,i,i);
