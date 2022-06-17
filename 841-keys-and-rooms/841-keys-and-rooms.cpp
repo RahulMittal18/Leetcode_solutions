@@ -3,7 +3,7 @@ public:
     void dfs(vector<vector<int>>& rooms,int src,vector<bool>& vis){
             vis[src]=true;
             for(auto x: rooms[src]){
-                if(x!=src && !vis[x]) dfs(rooms,x,vis);
+                if(!vis[x]) dfs(rooms,x,vis);
             }
         }
         
