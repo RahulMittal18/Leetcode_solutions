@@ -1,36 +1,28 @@
 class Solution {
-public:
-    int ans=0;
-    set<pair<int,int>> st;
-    void dfs(vector<int> adj[],vector<int> &vis,int node){
-        
-        vis[node]=1;
-        
-        for(auto x: adj[node])
-        {
-            if(vis[x]==0){
-                dfs(adj,vis,x);
-                if(st.find({node,x})!=st.end()) ans+=1;
-            }
-           
-        }
+ public:
+  int minReorder(int n, vector<vector<int>>& connections) {
+    vector<vector<int>> graph(n);
+
+    for (const auto& conn : connections) {
+      graph[conn[0]].push_back(conn[1]);
+      graph[conn[1]].push_back(-conn[0]);  // - := conn[0] -> conn[1]
     }
-    
-    int minReorder(int n, vector<vector<int>>& connections) {
-        
-       
-        vector<int> adj[n];
-        
-        for(auto x: connections){
-            st.insert({x[0],x[1]});
-            adj[x[0]].push_back(x[1]);
-            adj[x[1]].push_back(x[0]);
-        }
-        
-        vector<int> vis(n,0);
-        dfs(adj,vis,0);
-        
-        
-        return ans;
+
+    return dfs(graph, 0, -1);
+  }
+
+ private:
+  int dfs(const vector<vector<int>>& graph, int u, int parent) {
+    int change = 0;
+
+    for (const int v : graph[u]) {
+      if (abs(v) == parent)
+        continue;
+      if (v > 0)
+        ++change;
+      change += dfs(graph, abs(v), u);
     }
+
+    return change;
+  }
 };
