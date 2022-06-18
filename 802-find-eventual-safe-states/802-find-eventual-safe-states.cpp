@@ -1,29 +1,43 @@
 enum Color {WHITE, GRAY, BLACK};
 class Solution {
 public:
-    bool dfs(int i, vector<int> & color, vector<vector<int>> & graph)
-    {
-        if(color[i])
-            return color[i] == BLACK;
-        color[i] = GRAY;
-        for(int & v : graph[i])
-        {
-            if(color[v] == GRAY)
-                return false;
-            if(color[v] == WHITE && !dfs(v, color, graph))
-                return false;
+    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+
+        int n = graph.size();
+        vector<vector<int>> adj(n);
+        vector<int> indegree(n, 0);
+        int i = 0;
+
+        // Reverse Edges of graph
+        for(auto& g : graph) {
+            for(auto& it : g) {
+                adj[it].push_back(i);
+                indegree[i]++;
+            }
+            i++;
         }
-        color[i] = BLACK;
-        return true;
-    }
-    vector<int> eventualSafeNodes(vector<vector<int>>& graph)
-    {
-        int n = int(graph.size());
-        vector<int> color(n, WHITE);
-        vector<int> result;
-        for(int i = 0; i < n; ++i)
-            if(dfs(i, color, graph))
-                result.push_back(i);
-        return result;
+
+        // Topo Sort
+        queue<int> q;
+
+        for(int i=0; i<n; i++) {
+            if(indegree[i] == 0) q.push(i);
+        }
+
+        vector<int> safeNodes;
+
+        while(q.size()) {
+            int node = q.front(); q.pop();
+
+            safeNodes.push_back(node);
+
+            for(auto& adjnode : adj[node]) {
+                if(--indegree[adjnode] == 0) q.push(adjnode);
+            }
+        }
+
+        sort(safeNodes.begin(), safeNodes.end());
+
+        return safeNodes;
     }
 };
