@@ -18,7 +18,7 @@ public:
                 for(int i=0;i<popped.size();i++){
                     for(int j=0;j<26;j++){
                         string temp = popped;
-                        temp[i] = 97 + (int(temp[i]-'a'+j))%26;
+                        temp[i] = 97 + j;
                         if(vis.count(temp)==0 and s.count(temp)!=0){
                             q.push(temp);
                             vis.insert(temp);
