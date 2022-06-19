@@ -1,7 +1,7 @@
 class Solution {
 public:
     int openLock(vector<string>& deadends, string target) {
-        set<string> s;
+        unordered_set<string> s;
         for(auto x:deadends) s.insert(x);
         queue<string> q;
         q.push("0000");
