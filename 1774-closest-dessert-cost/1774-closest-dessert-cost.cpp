@@ -10,8 +10,8 @@ public:
         
         for(int j=0;j<=2;j++){
             temp+=(j*toppingCosts[i]);
-            if(abs(ans-target)>abs(temp-target)) ans = temp;
-            else if(abs(ans-target)==abs(temp-target)) ans = min(ans,temp);
+            // if(abs(ans-target)>abs(temp-target)) ans = temp;
+            // else if(abs(ans-target)==abs(temp-target)) ans = min(ans,temp);
             helper(toppingCosts,temp,i+1,target);
             temp-=(j*toppingCosts[i]);
         }
