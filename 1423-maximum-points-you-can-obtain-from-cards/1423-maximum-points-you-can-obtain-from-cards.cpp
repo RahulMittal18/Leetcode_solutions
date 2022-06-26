@@ -1,23 +1,23 @@
 class Solution {
 public:
     int maxScore(vector<int>& nums, int k) {
-        int n = nums.size()-k;
-        int r = 0;
+        int n = nums.size();
+        int r = n-1;
         int sum=0;
-        int total = accumulate(nums.begin(),nums.end(),0);
-        while(r<n){
-            sum+=nums[r];
-            r++;
+        int l=0;
+        while(l<k){
+            sum+=nums[l];
+            l++;
         }
+        l--;
         int ans = sum;
-        int i = 0;
-        while(r<nums.size()){
-            sum-=nums[i];
+        while(l>=0){
+            sum-=nums[l];
             sum+=nums[r];
-            r++;
-            i++;
-            ans = min(ans,sum);
-        }        
-        return total-ans;
+            r--;
+            l--;
+            ans = max(ans,sum);
+        }
+        return ans;
     }
 };
