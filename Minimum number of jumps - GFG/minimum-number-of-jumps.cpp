@@ -19,10 +19,14 @@ class Solution{
         int currR = arr[0];
         while(i<n-1){
             maxR= max(maxR, i+arr[i]);
-            if(i==currR && arr[i]==0&& maxR==currR) return -1;
+            
             if(i==currR){
-                jump++;
-                currR = maxR;
+                if(arr[i]==0&& maxR==currR) return -1;
+                else{
+                    jump++;
+                    currR = maxR;
+                }
+                
             }
             i++;
         }
