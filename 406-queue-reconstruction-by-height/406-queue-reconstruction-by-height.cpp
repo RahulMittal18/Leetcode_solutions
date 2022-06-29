@@ -8,12 +8,7 @@ public:
         sort(people.begin(),people.end(), cmp);
         vector<vector<int>> ans;
         for(int i=0;i<people.size();i++){
-            if(people[i][1]>=ans.size()){
-                ans.push_back(people[i]);
-            }
-            else{
                 ans.insert(ans.begin()+people[i][1],people[i]);
-            }
         }
         return ans;
     }
