@@ -88,20 +88,21 @@ Node* buildTree(string str)
 class Solution{
 public:
 
-    int ans=0;
-    void helper(Node *root,int l,int r){
-        if(!root) return;
-        if(root->data<=r and root->data>=l) ans++;
-        helper(root->left,l,r);
-        helper(root->right,l,r);
-    }
-
-
-
-    int getCount(Node *root, int l, int h)
+    int getCount(Node* root, int low, int high)
     {
-        helper(root,l,h);
-        return ans;
+    	if (!root) 
+    	    return 0;
+    
+    	if (root->data == high && root->data == low)
+    		return 1;
+    
+    	if (root->data <= high && root->data >= low)
+    		return 1+getCount(root->left,low,high)+getCount(root->right,low,high);
+    
+    	else if (root->data < low)
+    		return getCount(root->right, low, high);
+    
+    	else return getCount(root->left, low, high);
     }
 };
 
