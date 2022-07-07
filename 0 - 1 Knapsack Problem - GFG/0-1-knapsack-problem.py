@@ -6,22 +6,22 @@ class Solution:
     def knapSack(self,W, wt, val, n):
         mp={}
     
-        def solve(i,N,W,wt,val):
-            if i==N:
+        def solve(i,W,wt,val):
+            if i<0:
                 return 0
             
             if (i,W) in mp:
                 return mp[(i,W)]
             
-            not_take = solve(i+1,N,W,wt,val)
+            not_take = solve(i-1,W,wt,val)
             take = float("-inf")
             if W>=wt[i]:
-                take = val[i]+solve(i+1,N,W-wt[i],wt,val)
+                take = val[i]+solve(i-1,W-wt[i],wt,val)
                 
             mp[(i,W)] = max(take,not_take)
             return mp[(i,W)]
     
-        return solve(0,n,W,wt,val)
+        return solve(n-1,W,wt,val)
 
 #{ 
 #  Driver Code Starts
