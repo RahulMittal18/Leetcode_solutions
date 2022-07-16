@@ -15,9 +15,9 @@ public:
         for(int k=0;k<4;k++){
             int x = i+dir[k];
             int y = j+dir[k+1];
-            res += solve(x,y,m,n,moves-1)%mod;         
+            res =  (res+solve(x,y,m,n,moves-1))%mod;         
         }
-        return dp[i][j][moves]=res%mod;
+        return dp[i][j][moves]=res;
     }
     
     
@@ -26,8 +26,7 @@ public:
         ll ans = 0;
         memset(dp,-1,sizeof dp);
         for(int i=1;i<=maxMove;i++){
-            ans += solve(startRow,startColumn,m,n,i)%mod;
-            ans%=mod;
+            ans = (ans + solve(startRow,startColumn,m,n,i))%mod;
         }
         return ans;
     }
