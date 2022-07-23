@@ -1,6 +1,3 @@
-
-
-
 class Solution {
 public:
     void mergeSort(vector<pair<int,int>> &arr, vector<pair<int,int>> &temp, int left, int right,vector<int>&ans)
@@ -20,9 +17,9 @@ void merge(vector<pair<int,int>> &arr, vector<pair<int,int>> &temp, int left, in
     int i, j, k;
     int count = 0;
   
-    i = left; /* i is index for left subarray*/
-    j = mid; /* j is index for right subarray*/
-    k = left; /* k is index for resultant merged subarray*/
+    i = left;
+    j = mid; 
+    k = left;
     while ((i <= mid - 1) && (j <= right)) {
         if (arr[i].first <= arr[j].first) {
             ans[arr[i].second]+=count;
