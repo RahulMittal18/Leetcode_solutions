@@ -1,6 +1,6 @@
 class FoodRatings {
 public:
-    map<string,multiset<pair<int,string>>> mp;
+    unordered_map<string,multiset<pair<int,string>>> mp;
     unordered_map<string,int> rat; 
     unordered_map<string,string> cui;
     FoodRatings(vector<string>& foods, vector<string>& cuisines, vector<int>& ratings) {
@@ -12,12 +12,9 @@ public:
     }
     
     void changeRating(string food, int newRating) {
-        int old = rat[food];
-        rat[food] = newRating;
         string c = cui[food];
-        auto it = mp[c].find({-old,food});
-
-        mp[c].erase(it);
+        auto it = mp[c].erase({-rat[food],food});
+        rat[food] = newRating;
         mp[c].insert({-newRating,food});
     }
     
