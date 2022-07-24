@@ -29,10 +29,10 @@ public:
         for(int i=0;i<n;i++){
             f[i]=arr[i].first;
         }
-        cout<<n<<endl;
-        for(int i=0;i<n;i++){
-            cout<<f[i]<<" "<<p[i]<<endl;
-        }
+        // cout<<n<<endl;
+        // for(int i=0;i<n;i++){
+        //     cout<<f[i]<<" "<<p[i]<<endl;
+        // }
         for(int i=0;i<n;i++){
             for(int j=i+1;j<n;j++){
                 if(f[j]+f[i]>=k) {
