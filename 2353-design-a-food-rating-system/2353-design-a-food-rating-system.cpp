@@ -1,6 +1,6 @@
 class FoodRatings {
 public:
-    unordered_map<string,multiset<pair<int,string>>> mp;
+    unordered_map<string,set<pair<int,string>>> mp;
     unordered_map<string,int> rat; 
     unordered_map<string,string> cui;
     FoodRatings(vector<string>& foods, vector<string>& cuisines, vector<int>& ratings) {
