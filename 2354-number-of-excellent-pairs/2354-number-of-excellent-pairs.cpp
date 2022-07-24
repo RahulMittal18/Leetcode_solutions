@@ -25,17 +25,11 @@ public:
         for(int i=1;i<n;i++){
             p[i]=p[i-1]+arr[i].second;
         }
-        vector<int> f(n);
-        for(int i=0;i<n;i++){
-            f[i]=arr[i].first;
-        }
-        // cout<<n<<endl;
-        // for(int i=0;i<n;i++){
-        //     cout<<f[i]<<" "<<p[i]<<endl;
-        // }
+
+
         for(int i=0;i<n;i++){
             for(int j=i+1;j<n;j++){
-                if(f[j]+f[i]>=k) {
+                if(arr[j].first+arr[i].first>=k){
                     ans+= 2*(p[n-1]-p[j-1])*(arr[i].second);
                     break;
                 }
