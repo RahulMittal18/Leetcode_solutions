@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool rec(vector<set<int>> &r,vector<set<int>> &c,vector<set<int>> &b,vector<vector<char>>& board,int i,int j){
+    bool rec(vector<vector<int>> &r,vector<vector<int>> &c,vector<vector<int>> &b,vector<vector<char>>& board,int i,int j){
         if(j==9){
             if(i==8) return true;
             return rec(r,c,b,board,i+1,0);
@@ -11,18 +11,18 @@ public:
         else{
             bool crct = false;
             for(int k=1;k<=9;k++){
-                if(r[i].count(k)!=1 && c[j].count(k)!=1 && b[(i/3)*3 + j/3].count(k)!=1){
+                if(r[i][k]==0 && c[j][k]==0 && b[(i/3)*3 + j/3][k]==0){
                     board[i][j]='0'+k;
-                    r[i].insert(k);
-                    c[j].insert(k);
-                    b[(i/3)*3 + j/3].insert(k);
+                    r[i][k]=1;
+                    c[j][k]=1;
+                    b[(i/3)*3 + j/3][k]=1;
                     crct = rec(r,c,b,board,i,j+1);
                     if(crct==true){
                         return true;
                     }
-                    r[i].erase(k);
-                    c[j].erase(k);
-                    b[(i/3)*3 + j/3].erase(k);
+                    r[i][k]=0;
+                    c[j][k]=0;
+                    b[(i/3)*3 + j/3][k]=0;
                     board[i][j]='.';
                 }
             }
@@ -32,13 +32,13 @@ public:
     
     
     void solveSudoku(vector<vector<char>>& board) {
-        vector<set<int>> r(9),c(9),b(9);
+        vector<vector<int>> r(10,vector<int> (10,0)),c(10,vector<int>(10,0)),b(10,vector<int>(10,0));
         for(int i=0;i<9;i++){ 
             for(int j=0;j<9;j++){
                 if(board[i][j]!='.'){
-                    r[i].insert(board[i][j]-'0');
-                    c[j].insert(board[i][j]-'0');
-                    b[(i/3)*3 + j/3].insert(board[i][j]-'0');
+                    r[i][board[i][j]-'0']=1;
+                    c[j][board[i][j]-'0']=1;
+                    b[(i/3)*3 + j/3][board[i][j]-'0']=1;
                 }
                 
             }
