@@ -7,8 +7,7 @@ public:
             for(int k=j;k<m;k++) if(p[k]!='*') return 0;
             return 1;
         }
-            if(i==n && j==m) return 1;
-            else return 0;
+            return 0;
         }
         if(dp[i][j]!=-1) return dp[i][j];
         int ans = 0;
