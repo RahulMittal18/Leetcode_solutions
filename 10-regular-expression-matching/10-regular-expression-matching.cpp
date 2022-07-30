@@ -9,17 +9,18 @@ public:
         }
             return false;
         }
+        
         if(dp[i][j]!=-1) return dp[i][j];
-        if(prev!='-') if(prev==s[i] || prev=='.') return dp[i][j]= (solve(i-1,j,s,p,dp,prev) || solve(i,j-2,s,p,dp,'-'));
+        
+        if(prev!='-'){
+            if(prev==s[i] || prev=='.') return dp[i][j]= (solve(i-1,j,s,p,dp,prev) || solve(i,j-2,s,p,dp,'-'));
             else dp[i][j]=solve(i,j-2,s,p,dp,'-');
+        }   
+        
         if(s[i]==p[j] || p[j]=='.') return dp[i][j] = solve(i-1,j-1,s,p,dp,prev);
         else if(p[j]=='*'){
-            if(p[j-1]==s[i])
-                return dp[i][j]= (solve(i-1,j,s,p,dp,p[j-1]) || solve(i,j-2,s,p,dp,'-')) ;
-            else if(p[j-1]=='.')
-                return dp[i][j]= (solve(i-1,j,s,p,dp,p[j-1]) || solve(i,j-2,s,p,dp,'-')) ;
-            else return dp[i][j]= solve(i,j-2,s,p,dp,'-');
-                
+            if(p[j-1]==s[i] || p[j-1]=='.') return dp[i][j]= (solve(i-1,j,s,p,dp,p[j-1]) || solve(i,j-2,s,p,dp,'-')) ;
+            else return dp[i][j]= solve(i,j-2,s,p,dp,'-');       
         }
         else return dp[i][j]=false;
     }
