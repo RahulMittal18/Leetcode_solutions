@@ -13,7 +13,7 @@ public:
         int ans = 0;
         if(s[i]==p[j] || p[j]=='?') return dp[i][j] = solve(i+1,j+1,s,p,n,m,dp);
         else if(p[j]=='*'){
-            return dp[i][j]= solve(i,j+1,s,p,n,m,dp)| solve(i+1,j,s,p,n,m,dp) ;
+            return dp[i][j]= solve(i,j+1,s,p,n,m,dp) || solve(i+1,j,s,p,n,m,dp) ;
         }
         else return dp[i][j]=false;
     }
