@@ -3,7 +3,7 @@ public:
     
     int solve(int i,int j,string &s,string &p, int n,int m,vector<vector<int>> &dp){
         if(i==n || j==m){
-            if(n==i) {
+            if(i==n) {
             for(int k=j;k<m;k++) if(p[k]!='*') return 0;
             return 1;
         }
