@@ -1,39 +1,47 @@
 class NumArray {
 public:
     int n;
-    int psize;
-    vector<int> sq;
+    int csize;
+    vector<int> csum;
     vector<int> nums;
     NumArray(vector<int>& num) {
         n = num.size();
-        psize = ceil(sqrt(n));
-        sq.resize(psize,0);
-        for(int i=0; i<n;i++){
+        csize = ceil(sqrt(n));
+        csum.resize(csize,0);
+        for(int i=0;i<n;i++){
             nums.push_back(num[i]);
-            sq[i/psize]+=num[i];
+            csum[i/csize]+=num[i];
         }
     }
     
     void update(int index, int val) {
-        sq[index/psize]-=(nums[index]-val);
-        nums[index]=val;
+        csum[index/csize]-=nums[index];
+        csum[index/csize]+=val;
+        nums[index] = val;
     }
     
     int sumRange(int left, int right) {
-        // cout<<psize<<endl;
-        int bstart = left/psize;
-        int bend = right/psize;
-        int ans = 0;
-        // cout<<bstart<<bend<<endl;
-        if(bstart==bend) {
-            for(int i =left;i<=right;i++) ans+=nums[i];
+        int chunk_start = left/csize;
+        int chunk_end = right/csize;
+        int sum=0;
+        if(chunk_start==chunk_end){
+            for(int i=left;i<=right;i++){
+                sum+=nums[i];
+            }
         }
         else{
-            for(int i=left;i<(bstart+1)*psize;i++) ans+=nums[i];
-            for(int i=bstart+1;i<=bend-1;i++) ans+=sq[i];
-            for(int i=bend*psize; i<=right;i++) ans+=nums[i];
+            for(int i=left;i<(chunk_start+1)*csize;i++){
+                sum+=nums[i];
+            }
+            for(int i = chunk_start+1;i<chunk_end;i++){
+                sum+=csum[i];
+            }
+            for(int i=chunk_end*csize;i<=right;i++){
+                sum+=nums[i];
+            }
         }
-        return ans;        
+        return sum;
+        
     }
 };
 
