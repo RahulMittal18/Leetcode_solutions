@@ -12,7 +12,6 @@ public:
         int ans = 1;
         while(l<=r){
             int mid = l + (r-l)/2;
-            // cout<<l<<" "<<r<<" "<<" "<<mid<<" "<<check(mid,n)<<endl;
             if(check(mid,n)){
                 l=mid+1;
                 ans = mid;
@@ -21,7 +20,6 @@ public:
                 r=mid-1;
             }
         }
-        // if(check(l,n)) return l-1;
         return ans;
     }
 };
