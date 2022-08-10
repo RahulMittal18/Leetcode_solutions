@@ -14,7 +14,7 @@ public:
     
     TreeNode* build(vector<int> &nums,int st,int end){
         if(st>end) return nullptr;
-        int mid = st + (end-st)/2;
+        int mid = (st + end)/2;
         TreeNode* root = new TreeNode(nums[mid]);
         if(st==end) return root;
         root->left = build(nums,st,mid-1);
