@@ -1,14 +1,21 @@
 class Solution {
-public:
-    
-    bool check(TreeNode* root, long long min, long long max){
-        if(root==NULL) return true;
-        
-        return (min < root->val && root->val < max) && (check(root->left, min, root->val)) && (check(root->right, root->val, max));
-    }
-    
+public:  
     
     bool isValidBST(TreeNode* root) {
-        return check(root,LLONG_MIN,LLONG_MAX);
+        stack<TreeNode*> st;
+        TreeNode* prev = NULL;
+        while( root || !st.empty()){
+            while(root){
+                st.push(root);
+                root = root->left;
+            }
+            TreeNode* popped = st.top();
+            st.pop();
+            
+            if(prev && prev->val >= popped->val) return false;
+            prev = popped;
+            root = popped->right;
+        }
+        return true;
     }
 };
