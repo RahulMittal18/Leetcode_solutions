@@ -7,7 +7,6 @@ public:
         vector<vector<int>> right(n,vector<int> (n,1));                         
         vector<vector<int>> block(n,vector<int> (n,1));
 
-        // unordered_map<pair<int,int>,int> block;
         for(auto e:mines){
             block[e[0]][e[1]]=0;
         } 
