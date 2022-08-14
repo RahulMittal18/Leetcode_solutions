@@ -19,6 +19,7 @@ public:
     
     vector<vector<string>> findLadders(string beginWord, string endWord, vector<string>& wordList) {
         set<string> s(wordList.begin(), wordList.end());
+        if(s.count(endWord)==0) return {};
         unordered_map<string,int> level;
         unordered_map<string,vector<string>> adj;
         queue<string> q;
