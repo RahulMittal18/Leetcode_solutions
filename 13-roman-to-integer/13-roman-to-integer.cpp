@@ -10,26 +10,15 @@ public:
         mp['D']=500;
         mp['M']=1000;
         int ans = 0;
-        char prev = '#';
         int n = s.size();
-        for(int i=n-1;i>=0;i--){
-            if(s[i]=='I'){
-                if(prev=='X' || prev=='V') ans-=mp[s[i]];
-                else ans+=mp[s[i]];
-            }
-            else if(s[i]=='X'){
-                if(prev=='L' || prev=='C') ans-=mp[s[i]];
-                else ans+=mp[s[i]];
-            }
-            else if(s[i]=='C'){
-                if(prev=='D' || prev=='M') ans-=mp[s[i]];
-                else ans+=mp[s[i]];
+        for(int i=0;i<n-1;i++){
+            if(mp[s[i]]<mp[s[i+1]]){
+                ans-=mp[s[i]];
             }
             else{
                 ans+=mp[s[i]];
             }
-            prev = s[i];
         }
-        return ans;
+        return ans+mp[s[n-1]];
     }
 };
