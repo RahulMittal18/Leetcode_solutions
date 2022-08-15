@@ -11,14 +11,14 @@ public:
         mp['M']=1000;
         int ans = 0;
         int n = s.size();
-        for(int i=0;i<n-1;i++){
-            if(mp[s[i]]<mp[s[i+1]]){
+        for(int i=0;i<n;i++){
+            if(i+1<n && mp[s[i]]<mp[s[i+1]]){
                 ans-=mp[s[i]];
             }
             else{
                 ans+=mp[s[i]];
             }
         }
-        return ans+mp[s[n-1]];
+        return ans;
     }
 };
