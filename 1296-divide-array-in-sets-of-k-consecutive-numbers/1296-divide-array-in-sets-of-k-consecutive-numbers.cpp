@@ -1,11 +1,11 @@
 class Solution {
 public:
     bool isPossibleDivide(vector<int>& nums, int k) {
+        int n = nums.size();
         sort(nums.begin(),nums.end());
         map<int,int> mp;
-        for(auto &num:nums) mp[num]++;
+        for(int i=0;i<n;i++) mp[nums[i]]++;
         int i=0;
-        int n = nums.size();
         while(i<n){
             if(mp[nums[i]]>0){
                 for(int j=0;j<k;j++){
