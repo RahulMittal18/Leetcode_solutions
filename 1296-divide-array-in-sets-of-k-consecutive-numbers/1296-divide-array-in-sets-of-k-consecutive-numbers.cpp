@@ -3,7 +3,7 @@ public:
     bool isPossibleDivide(vector<int>& nums, int k) {
         sort(nums.begin(),nums.end());
         map<int,int> mp;
-        for(auto num:nums) mp[num]++;
+        for(auto &num:nums) mp[num]++;
         int i=0;
         int n = nums.size();
         while(i<n){
