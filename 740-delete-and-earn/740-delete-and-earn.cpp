@@ -1,22 +1,23 @@
 class Solution {
 public:
     map<int,int> mp;
-    int solve(int i,vector<int> &dp,int size){
-        if(i>=size) return 0;
-        if(dp[i]==-1){
-            dp[i]=max(solve(i+1,dp,size),mp[i]+solve(i+2,dp,size));
-        }
-        return dp[i];
-    }
-    
-    int rob(int i) {
-        vector<int> dp(i,-1);
-        return solve(0,dp,i);
+    int solve(int i,int n,vector<int>&arr,vector<int>&dp){
+        if(i>=10001) return 0;
+        if(dp[i]!=-1) return dp[i];
+        
+        return dp[i]=max(mp[i]*i+solve(i+2,n,arr,dp),solve(i+1,n,arr,dp));
     }
     
     int deleteAndEarn(vector<int>& nums) {
-        for(int x:nums) mp[x]+=x;
-        int i = *max_element(nums.begin(),nums.end());
-        return rob(i+1);
+        for(auto x:nums){
+            mp[x]++;
+        }
+        vector<int> arr;
+        for(auto k:mp){
+            arr.push_back(k.first);
+        }
+        int n = arr.size();
+        vector<int> dp(10001,-1);
+        return solve(0,n,arr,dp);
     }
 };
