@@ -26,7 +26,6 @@ public:
                 if(f->left) q.push(f->left);
                 if(f->right) q.push(f->right);
             }
-            // double t = 
             ans.push_back(temp/n);
         }
         return ans;
