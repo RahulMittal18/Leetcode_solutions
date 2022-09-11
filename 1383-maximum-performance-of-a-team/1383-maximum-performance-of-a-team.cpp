@@ -19,12 +19,9 @@ public:
             }
             else{
                 long long x = pq.top();
-                prev = (temp*v[i-1].first);
-                curr = ((temp-x+v[i].second)*v[i].first);
                 pq.pop();
                 pq.push(v[i].second);
                 temp = (temp-x+v[i].second);
-                
             }
             long long a = (v[i].first*temp);
             if(a>ans) ans = a;
