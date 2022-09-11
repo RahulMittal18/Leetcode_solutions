@@ -10,7 +10,6 @@ public:
         long long ans = 0;
         sort(v.rbegin(),v.rend());
         long long temp=0;
-        long long prev,curr;
         for(int i=0;i<n;i++){
             if(pq.size()<k){
                 temp+=v[i].second;
