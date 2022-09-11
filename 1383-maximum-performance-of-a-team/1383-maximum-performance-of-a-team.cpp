@@ -8,8 +8,7 @@ public:
             v.push_back({efficiency[i],speed[i]});
         }
         long long ans = 0;
-        sort(v.begin(),v.end());
-        reverse(v.begin(),v.end());
+        sort(v.rbegin(),v.rend());
         long long temp=0;
         long long prev,curr;
         for(int i=0;i<n;i++){
