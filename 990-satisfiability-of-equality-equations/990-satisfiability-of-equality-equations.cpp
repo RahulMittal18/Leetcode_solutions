@@ -1,6 +1,6 @@
 class Solution {
-public:
     unordered_map<char,char> par;
+public:
 
     char parent(char c){
         if(par[c]==c) return c;
@@ -8,10 +8,7 @@ public:
     }
     
     void unite(char a,char b){
-        // cout<<a<<par[a]<<" "<<b<<par[b]<<endl;
         par[a]=b;
-                // cout<<a<<par[a]<<" "<<b<<par[b]<<endl;
-
     }
     
     bool equationsPossible(vector<string>& equations) {
@@ -39,6 +36,5 @@ public:
             }
         }
         return true;
-        
     }
 };
