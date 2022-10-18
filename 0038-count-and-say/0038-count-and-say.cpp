@@ -1,25 +1,23 @@
 class Solution {
 public:
-    string countAndSay(int n) {
-        if(n==1) return "1";
-        string temp = countAndSay(n-1);
-        string ans = "";
-        int l=1;
-        char c=temp[0];
-        for(int i=1;i<temp.size();i++){
-            if(temp[i]==temp[i-1]){
-                l++;
-            }
-            else{
-                ans+=(l+'0');
-                ans+=c;
-                c=temp[i];
-                l=1;
-            }
+    string solve(int n, string s = "1") {
+        if(n==1) return s; 
+
+        int i=0, j, len = s.size();
+        string res = "";
+
+        while(i<len) {
+            j=i;
+
+            while(i<len && s[i]==s[j]) i++;
+
+            res += to_string(i-j) + s[j];
         }
-        
-        ans+=(l+'0');
-        ans+=c;
-        return ans;
+
+        return solve(n-1, res);
+    }
+    
+    string countAndSay(int n) {
+        return solve(n);
     }
 };
