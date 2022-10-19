@@ -1,26 +1,26 @@
 class Solution {
 public:
-    vector<string> topKFrequent(vector<string>& words, int k) {
+    vector<string> topKFrequent(vector<string>& words, int kk) {
         map<string,int> mp;
         for(auto x:words) mp[x]++;
-        priority_queue<pair<int,string>>pq;
         vector<string> ans;
+        
+        map<int,vector<string>> t;
         for(auto k:mp){
-            pq.push({k.second,k.first});
+            t[k.second].push_back(k.first);
         }
-        while(k>0){
-            priority_queue<string,vector<string>,greater<string>>temp;
-            int x = pq.top().first;
-            while(pq.size() && pq.top().first==x){
-                string y = pq.top().second;
-                temp.push(y);
-                pq.pop();
+        // for(auto k:t) cout<<k.first<<" "<<k.second.size()<<endl;
+        for(auto k = t.rbegin();k!=t.rend() && kk>0;k++){
+            vector<string> c = k->second;
+            // for(auto x:c) cout<<x<<endl;
+            sort(c.begin(),c.end());
+            int n = c.size();
+            int z = min(kk,n);
+            for(int i =0;i<z;i++){
+                // cout<<c[i]<<endl;
+                ans.push_back(c[i]);
+                kk--;
             }
-            while(k>0 && temp.size()){
-                ans.push_back(temp.top());
-                temp.pop(); 
-                k--;
-            }            
         }
         return ans;
     }
