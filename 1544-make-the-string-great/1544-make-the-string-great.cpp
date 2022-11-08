@@ -3,12 +3,8 @@ public:
     string makeGood(string s) {
         stack<char> st;
         for(auto c:s){
-            if(st.size() && (st.top()==c+32 || st.top()==c-32)){
-                st.pop();
-            }
-            else{
-                st.push(c);
-            }
+            if(st.size() && abs(st.top()-c)==32) st.pop();
+            else st.push(c);
         }
         string ans="";
         while(st.size()){
