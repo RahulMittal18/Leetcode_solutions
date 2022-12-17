@@ -9,7 +9,6 @@ public:
     
     int evalRPN(vector<string>& tokens) {
         stack<long> st;
-        
         int n = tokens.size();
         for(int i=0;i<n;i++){
             if(isOperator(tokens[i])){
