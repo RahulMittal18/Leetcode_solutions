@@ -3,10 +3,9 @@ public:
     vector<int> getOrder(vector<vector<int>>& givenTasks) {
         int n = givenTasks.size();
         vector<int> ans;
-        vector<vector<int>> tasks;
+        vector<array<int,3>> tasks;
         for(int i=0;i<n;i++) tasks.push_back({givenTasks[i][0],givenTasks[i][1],i});
         sort(tasks.begin(),tasks.end());
-
         priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
         long long t=0;
         int i=0;
