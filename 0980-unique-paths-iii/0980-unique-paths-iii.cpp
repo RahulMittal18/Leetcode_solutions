@@ -9,13 +9,8 @@ public:
         if(curr==end){
             return steps==0?1:0;
         }
-        // auto [i,j]=curr;
-        int i = curr.first;
-        int j = curr.second;
-        // cout<<"reached "<<i<<" "<<j<<endl;
+        auto [i,j]=curr;
         vis[i*n+j]=true;
-        // for(int i=0;i<n*grid[0].size();i++) cout<<vis[i]<<" ";
-        // cout<<endl;
         int dir[5]={0,-1,0,1,0};
         int temp = 0;
         for(int k=0;k<4;k++){
