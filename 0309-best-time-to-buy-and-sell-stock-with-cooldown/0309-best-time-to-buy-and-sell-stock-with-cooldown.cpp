@@ -4,14 +4,14 @@ public:
         int n = prices.size();
         int buy[n+2],sell[n+2];
         int ans = 0;
-        buy[0]=INT_MIN;
-        buy[1]=INT_MIN;
-        sell[0]=0;
-        sell[1]=0;
+        int prev_buy=INT_MIN;
+        int prev_sell=0;
+        int prev2_sell=0;
         for(int i=0;i<n;i++){
-            buy[i+2] = max(buy[i+1],sell[i]-prices[i]);
-            sell[i+2] = max(buy[i+1]+prices[i],sell[i+1]);
-            ans = max(ans,sell[i+2]);
+            prev_buy = max(prev_buy,prev2_sell-prices[i]);
+            prev2_sell = prev_sell;
+            prev_sell = max(prev_buy+prices[i],prev_sell);
+            ans = max(ans,prev_sell);
         }
         return ans;
     }
