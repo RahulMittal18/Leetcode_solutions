@@ -4,11 +4,7 @@ public:
         int ans = 1;
         unordered_map<int,int> mp;
         for(int j=0;j<points.size();j++){
-            // for(int i=j+1;i<points.size();i++){
-                // int num = points[i][1]-points[j][1];
-                // int den = points[i][0]-points[j][0];
-                mp[points[j][0]]++;
-            // }
+            mp[points[j][0]]++;
         }
         for(int j=0;j<points.size();j++){
             for(int i=j+1;i<points.size();i++){
@@ -26,9 +22,7 @@ public:
                 ans=max(ans,curr);
             }
         }
-        // cout<<ans<<endl;
         for(auto k:mp){
-            // cout<<k.first<<" "<<k.second<<endl;
             ans = max(ans,k.second);
         }
         return ans;
