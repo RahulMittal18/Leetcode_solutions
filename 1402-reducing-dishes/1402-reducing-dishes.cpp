@@ -1,34 +1,29 @@
 class Solution {
 public:
-    int maxSatisfaction(vector<int>& s) {
-        int maxx=0;
-        vector<int> v1;
-        vector<int> v2;
-        for(int i=0;i<s.size();i++){
-            if(s[i]>0){
-                v1.push_back(s[i]);
-            }
-            else{
-                v2.push_back(s[i]);
-            }
+    int findMaxSatisfaction(vector<int>& satisfaction, vector<vector<int>>& memo, int index, int time) {
+        // Return 0 if we have iterated over all the dishes.
+        if (index == satisfaction.size()) {
+            return 0;
         }
-        sort(v1.begin(),v1.end());
-        sort(v2.begin(),v2.end());
-        int x=v2.size();
-        while(x+1){
-            int j=1;
-            int ans=0;
-            for(int i=x;i<v2.size();i++){
-                ans+=j*v2[i];
-                j++;
-            }
-            for(int i=0;i<v1.size();i++){
-                ans+=j*v1[i];
-                j++;
-            }
-            maxx=max(ans,maxx);
-            x--;
+        
+        // We have already calculated the answer, so no need to go into recursion.
+        if (memo[index][time] != -1) {
+            return memo[index][time];
         }
-    return maxx;}
-};
+        
+        // Return the maximum of two choices:
+        // 1. Cook the dish at `index` with the time taken as `time` and move on to the next dish with time as time + 1.
+        // 2. Skip the current dish and move on to the next dish at the same time.
+        return memo[index][time] = max(satisfaction[index] * time + findMaxSatisfaction(satisfaction, memo, index + 1, time + 1), 
+                                       findMaxSatisfaction(satisfaction, memo, index + 1, time));
+    }
     
+    int maxSatisfaction(vector<int>& satisfaction) {
+        sort(satisfaction.begin(), satisfaction.end());
+
+        // Mark, all the states as -1, denoting not yet calculated.
+        vector<vector<int>> memo(satisfaction.size() + 1, vector<int>(satisfaction.size() + 1, -1));
+        
+        return findMaxSatisfaction(satisfaction, memo, 0, 1);
+    }
+};
