@@ -49,38 +49,6 @@ class Solution {
         return ((fact[n] * inv(fact[k]) % p) * inv(fact[n-k])) % p;
     }
     
-    int ncr(int n, int r)
-{
- 
-    // p holds the value of n*(n-1)*(n-2)...,
-    // k holds the value of r*(r-1)...
-    long long p = 1, k = 1;
- 
-    // C(n, r) == C(n, n-r),
-    // choosing the smaller value
-    if (n - r < r)
-        r = n - r;
- 
-    if (r != 0) {
-        while (r) {
-            p = (p*n)%mod;
-            k = (k*r)%mod;
-
-            long long m = __gcd(p, k);
-            p /= m;
-            k /= m;
- 
-            n--;
-            r--;
-        }
-    }
- 
-    else
-        p = 1;
- 
-    // if our approach is correct p = ans and k =1
-    return p%mod;
-}
 
   
     int bestNumbers(int N, int A, int B, int C, int D) {
