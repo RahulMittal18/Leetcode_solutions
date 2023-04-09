@@ -1,37 +1,28 @@
 class Solution {
-    typedef array<int, 26> T;
-public:
-    int largestPathValue(string C, vector<vector<int>>& E) {
-        unordered_map<int, vector<int>> G;
-        vector<int> indegree(C.size());
-        for (auto &e : E) {
-            G[e[0]].push_back(e[1]); // build graph
-            indegree[e[1]]++; // count indegrees
-        }
-        vector<T> cnt(C.size(), T{}); // cnt[i][j] is the maximum count of j-th color from the ancester nodes to node i.
-        queue<int> q;
-        for (int i = 0; i < C.size(); ++i) {
-            if (indegree[i] == 0) { // if this node has 0 indegree, we can use it as a source node
-                q.push(i);
-                cnt[i][C[i] - 'a'] = 1; // the count of the current color should be 1
-            }
-        }
-        int ans = 0, seen = 0;
-        while (q.size()) {
-            auto u = q.front();
-            q.pop();
-            int val = *max_element(begin(cnt[u]), end(cnt[u])); // we use the maximum of all the maximum color counts as the color value.
-            ans = max(ans, val);
-            ++seen;
-            for (int v : G[u]) {
-                for (int i = 0; i < 26; ++i) {
-                    cnt[v][i] = max(cnt[v][i], cnt[u][i] + (i == C[v] - 'a')); // try to use node `u` to update all the color counts of node `v`.
+    public:
+        int dfs(int i, string &c, vector<vector<int>> &al, vector<vector<int>> &cnt, vector<int> &visited){
+            if (!visited[i]) {
+                visited[i] = 1;
+                for (auto j : al[i]) {
+                    if (dfs(j, c, al, cnt, visited) == INT_MAX)
+                        return INT_MAX;
+                    for (auto k = 0; k < 26; ++k)
+                        cnt[i][k] = max(cnt[i][k], cnt[j][k]);
                 }
-                if (--indegree[v] == 0) {
-                    q.push(v);
-                }
+                ++cnt[i][c[i] - 'a'];
+                visited[i] = 2;
             }
+            return visited[i] == 2 ? cnt[i][c[i] - 'a'] : INT_MAX;
         }
-        return seen < C.size() ? -1 : ans;
-    }
+    
+        int largestPathValue(string c, vector<vector<int>>& edges) {
+            vector<vector<int>> al(c.size()), cnt(c.size(), vector<int>(26));
+            vector<int> visited(c.size());
+            for (auto &e : edges)
+                al[e[0]].push_back(e[1]);
+            int res = 0;
+            for (auto i = 0; i < c.size() && res != INT_MAX; ++i)
+                res = max(res, dfs(i, c, al, cnt, visited));
+            return res == INT_MAX ? -1 : res;
+        }
 };
