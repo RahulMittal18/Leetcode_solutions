@@ -11,7 +11,7 @@ public:
             else{
                 int s = dir.size();
                 if(s==1){
-                    if(dir[0]!='.') st.push(dir);
+                    if(dir!=".") st.push(dir);
                 }
                 else if(s==2){
                     if(dir==".."){
