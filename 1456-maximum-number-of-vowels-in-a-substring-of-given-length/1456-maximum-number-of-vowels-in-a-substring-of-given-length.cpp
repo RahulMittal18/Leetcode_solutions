@@ -5,12 +5,7 @@ public:
         int l = 0;
         int n = ss.size();
         int r = 0;
-        set<char> s;
-        s.insert('a');
-        s.insert('e');
-        s.insert('i');
-        s.insert('o');
-        s.insert('u');
+        unordered_set<char> s{'a','e','i','o','u'};
         int temp = 0;
         while(r<n){
             if(s.count(ss[r])){
