@@ -9,21 +9,10 @@
  * };
  */
 class Solution {
-public:
-    ListNode* solve(ListNode* head, int &mx){
-        if(!head) return head;
-        if(!head->next) {
-            mx = max(mx,head->val);
-            return head;
-        }
-        head->next = solve(head->next,mx);
-        if(mx>head->val) return head->next;
-        mx=max(mx,head->val);
-        return head;
-    }
-    
+public:    
     ListNode* removeNodes(ListNode* head) {
-        int mx = 0;
-        return solve(head,mx);
+        if(!head) return NULL;
+        head->next = removeNodes(head->next);
+        return head->next && head->val < head->next->val ?  head->next : head;
     }
 };
