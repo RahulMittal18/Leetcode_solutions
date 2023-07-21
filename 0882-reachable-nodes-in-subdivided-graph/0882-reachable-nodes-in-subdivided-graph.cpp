@@ -23,7 +23,7 @@ public:
                 for(auto neighbor : adj[node]){
                     int nei = neighbor.first;
                     int steps = neighbor.second;
-                    if(seen[nei]==-1 && 0 <= moves - steps - 1){
+                    if(seen[nei]==-1 || seen[nei] < moves - steps - 1){
                         pq.push({moves-steps-1,nei});
                     }
                 }
