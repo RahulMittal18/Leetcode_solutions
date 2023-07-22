@@ -18,9 +18,9 @@ public:
     }
     
     double knightProbability(int n, int k, int row, int column) {
-        for(int i=0;i<26;i++){
-            for(int j=0;j<26;j++){
-                for(int l=0;l<101;l++){
+        for(int i=0;i<n+1;i++){
+            for(int j=0;j<n+1;j++){
+                for(int l=0;l<k+1;l++){
                     dp[i][j][l]=-1;
                 }
             }
