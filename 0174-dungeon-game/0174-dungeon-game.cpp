@@ -27,11 +27,10 @@ public:
     int calculateMinimumHP(vector<vector<int>>& dungeon) {
         
         int l =1;
-        int r =1e7;
+        int r =400001;
         int ans = INT_MAX;
         while(l<=r){
             int mid = l + (r-l)/2;
-            // cout<<mid<<endl;
             if(check(mid,dungeon)){
                 ans = mid;
                 r = mid-1;
@@ -41,7 +40,5 @@ public:
             }
         }
         return ans;
-        
-        // return solve(0,0,dungeon,dp);
     }
 };
