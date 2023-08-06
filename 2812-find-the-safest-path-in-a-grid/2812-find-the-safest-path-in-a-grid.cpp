@@ -10,8 +10,8 @@ public:
                     ts.push({1, i, j});
         while (!ts.empty()) {
             auto [sf, i, j] = ts.top(); ts.pop();
-            if (g[i][j] < sf)
-                continue;
+            // if (g[i][j] < sf)
+            //     continue;
             for (int d = 0; d < 4; ++d) {
                 int x = i + dir[d], y = j + dir[d + 1];
                 if (min(x, y) >= 0 && max(x, y) < n && (g[x][y] == 0 ||  g[x][y] > sf + 1)) {
