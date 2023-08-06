@@ -1,7 +1,7 @@
 class Solution {
 public:
     int maximumSafenessFactor(vector<vector<int>>& g) {
-        priority_queue<array<int, 3>, vector<array<int, 3>>, greater<array<int, 3>>> ts;
+        queue<array<int, 3>> ts;
         priority_queue<array<int, 3>> pq;
         int dir[5] = {1, 0, -1, 0, 1}, n = g.size();
         for (int i = 0; i < n; ++i)
@@ -9,7 +9,7 @@ public:
                 if (g[i][j])
                     ts.push({1, i, j});
         while (!ts.empty()) {
-            auto [sf, i, j] = ts.top(); ts.pop();
+            auto [sf, i, j] = ts.front(); ts.pop();
             // if (g[i][j] < sf)
             //     continue;
             for (int d = 0; d < 4; ++d) {
