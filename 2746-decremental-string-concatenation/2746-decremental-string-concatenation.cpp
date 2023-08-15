@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int dp[5001][26][26];
+    int dp[1001][26][26];
     int solve(int i,vector<string> &words,char f,char b){
         if(i==words.size()) return 0;
         
