@@ -23,12 +23,7 @@ public:
     
     int maximumPoints(vector<vector<int>>& edges, vector<int>& coins, int kk) {
         k = kk;
-        // memset(dp,-1,sizeof(dp));
-        for(int i=0;i<100005;i++){
-            for(int j=0;j<15;j++){
-                dp[i][j]=-1;
-            }
-        }
+        memset(dp,-1,sizeof(dp));
         for(auto e:edges){
             adj[e[0]].push_back(e[1]);
             adj[e[1]].push_back(e[0]);
