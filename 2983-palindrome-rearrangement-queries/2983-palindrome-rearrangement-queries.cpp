@@ -39,7 +39,7 @@ public:
             s.push_back(str[i]);
             t.push_back(str[2*n-i-1]);
         }
-        cout<<s<<t<<endl;
+        // cout<<s<<t<<endl;
         equalPre.resize(n,0);
         for(int i=0;i<n;i++){
             if(s[i]==t[i]) equalPre[i] = 1;
@@ -69,7 +69,7 @@ public:
             int r1 = query[1];
             int l2 = 2*n - query[3] - 1;
             int r2 = 2*n - query[2] - 1;
-            cout<<l1<<" "<<r1<<" "<<l2<<" "<<r2<<endl;
+            // cout<<l1<<" "<<r1<<" "<<l2<<" "<<r2<<endl;
             int L = min(l1,l2);
             int R = max(r1,r2);
             
@@ -143,7 +143,7 @@ public:
                 
                 // cout<<"here1"<<L<<R<<endl;
 
-                cout<<nop1<<nop2<<endl;
+                // cout<<nop1<<nop2<<endl;
                 if(nop1!=L || nop2!=n-R-1){
                     ans[i] = false;
                     continue;
