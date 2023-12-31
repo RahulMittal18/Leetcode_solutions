@@ -39,7 +39,6 @@ public:
             s.push_back(str[i]);
             t.push_back(str[2*n-i-1]);
         }
-        // cout<<s<<t<<endl;
         equalPre.resize(n,0);
         for(int i=0;i<n;i++){
             if(s[i]==t[i]) equalPre[i] = 1;
@@ -69,12 +68,11 @@ public:
             int r1 = query[1];
             int l2 = 2*n - query[3] - 1;
             int r2 = 2*n - query[2] - 1;
-            // cout<<l1<<" "<<r1<<" "<<l2<<" "<<r2<<endl;
             int L = min(l1,l2);
             int R = max(r1,r2);
             
             
-            /* non- overlapping */
+            /* non-overlapping */
             
             //     ---l1..r1--------
             //     ----------l2..r2-  
@@ -94,7 +92,6 @@ public:
                     ans[i] = false;
                     continue;
                 }
-                                // cout<<"h2"<<endl;
 
                 ans[i] = true;
                 continue;
@@ -103,25 +100,21 @@ public:
 
             //     ----------l1..r1- 
             //     ---l2..r2--------
+            
             if(r2<l1){
                 int nop1 = getEqual(0,l2-1);
                 int nop2 = getEqual(r2+1,l1-1);
                 int nop3 = getEqual(r1+1,n-1);
-                                                // cout<<"h1"<<endl;
-                // cout<<nop1<<nop2<<nop3<<endl;
+
                 if(nop1!=l2 || nop2!=l1-r2-1 || nop3!=n-r1-1){
                     ans[i] = false;
                     continue;
                 }
-                                                // cout<<"h1"<<endl;
-
                 
                 if(!canMakeEqual(l1,r1) || !canMakeEqual(l2,r2)){
                     ans[i] = false;
                     continue;
                 }
-                                                // cout<<"h1"<<endl;
-
                 
                 ans[i] = true;
                 continue;    
@@ -141,23 +134,15 @@ public:
                 int nop1 = getEqual(0,L-1);
                 int nop2 = getEqual(R+1,n-1);
                 
-                // cout<<"here1"<<L<<R<<endl;
-
-                // cout<<nop1<<nop2<<endl;
                 if(nop1!=L || nop2!=n-R-1){
                     ans[i] = false;
                     continue;
                 }
                 
-                                // cout<<"here2"<<endl;
-
-                
                 if(!canMakeEqual(L,R)){
                     ans[i] = false;
                     continue;
                 }
-                                // cout<<"here3"<<endl;
-
                 
                 ans[i] = true;
                 continue;  
@@ -185,23 +170,21 @@ public:
                     ans[i] = false;
                     continue;
                 }
-                // cout<<"hi"<<endl;
+                
                 bool ok = true;
                 
                 for(int j=0;j<26;j++){
                     int reqd = charFreq(ft,j,l1,l2-1);
                     ok &= ofs[j]>=reqd;
                     ofs[j]-=reqd;
-                                        oft[j]-=reqd;
-
+                    oft[j]-=reqd;
                 }
                 
                 for(int j=0;j<26;j++){
                     int reqd = charFreq(fs,j,r1+1,r2);
                     ok &= oft[j]>=reqd;
                     oft[j]-=reqd;
-                                        ofs[j]-=reqd;
-
+                    ofs[j]-=reqd;
                 }
                 
                 ok &= isEqualLeft(ofs,oft);
@@ -223,32 +206,27 @@ public:
                     continue;
                 }
                 
-                // cout<<"h1"<<endl;
                 bool ok = true;
-                // for(int kk=0;kk<4;kk++) {cout<<ofs[kk]<<" "<<oft[kk]<<endl;}
+
                 for(int j=0;j<26;j++){
                     int reqd = charFreq(fs,j,l2,l1-1);
                     ok &= oft[j]>=reqd;
                     oft[j]-=reqd;
                     ofs[j]-=reqd;
                 }
-                // for(int kk=0;kk<4;kk++) {cout<<ofs[kk]<<" "<<oft[kk]<<endl;}
 
-                // cout<<ok;
                 for(int j=0;j<26;j++){
                     int reqd = charFreq(ft,j,r2+1,r1);
                     ok &= ofs[j]>=reqd;
                     ofs[j]-=reqd;
                     oft[j]-=reqd;
                 }
-                // cout<<ok;
+
                 ok &= isEqualLeft(ofs,oft);
-                // cout<<ok;
+
                 ans[i] = ok;
                 continue;
-            }
-            
-                      
+            }         
         }    
         
         
