@@ -11,25 +11,20 @@ public:
         if(s.size()<suff.size()) return 0;
         int limit;
         
+        if(tight) limit=min(mxl,s[idx]-'0');
+        else limit=mxl;
+        
         if(idx<s.size()-suff.size()){
-            if(tight) limit=min(mxl,s[idx]-'0');
-            else limit=mxl;
-            // cout<<limit<<endl;
             for(int i=0;i<=limit;i++){   
                 int ntight = ((i==s[idx]-'0') && tight)? 1 : 0;
                 ans= (ans+solve(idx+1,ntight,s,suff,mxl));  
             }
         }
         else{
-            if(tight) limit=min(mxl,s[idx]-'0');
-            else limit = mxl;
-            int ntight = tight;
-            cout<<idx<<" "<<tight<<" "<<limit<<" "<<((suff[idx-s.size()+suff.size()])-'0')<<endl;
-            if(suff[idx-s.size()+suff.size()]-'0'<s[idx]-'0') ntight=0;
             if(limit>=((suff[idx-s.size()+suff.size()])-'0')){
+                int ntight = ((suff[idx-s.size()+suff.size()]-'0'>=s[idx]-'0') && tight) ? 1 : 0;
                 ans= (ans+solve(idx+1,ntight,s,suff,mxl)); 
             }
-            // cout<<idx<<"uuu"<<limit<<" "<<(suff[idx-s.size()+suff.size()]-'0')<<endl;
         }
         
         return dp[idx][tight] = ans;
@@ -43,9 +38,7 @@ public:
         string l  = to_string(low);
         long upper = solve(0,1,h,s,limit);
         memset(dp, -1, sizeof(dp));
-        // long lower = 0;
         long lower = solve(0,1,l,s,limit);
-        // cout<<upper<<" "<<lower<<endl;
         return (upper - lower);
     }
 };
